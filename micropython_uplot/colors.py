@@ -13,18 +13,23 @@ MicroPython Graphics Library
 
 """
 
+
 def create_color(ssd, idx, r, g, b):
-    
-    c = ssd.rgb(r, g, b)
+    """
+    Creates a color in the LUT of the display and returns the index."""
+
+    color = ssd.rgb(r, g, b)
 
     x = idx << 1
-    ssd.lut[x] = c & 0xff
-    ssd.lut[x + 1] = c >> 8
+    ssd.lut[x] = color & 0xFF
+    ssd.lut[x + 1] = color >> 8
     return idx
 
 
 def set_color(display, idx, r, g, b):
-    if hasattr(display, 'lut'):
+    """
+    Sets the color in the LUT of the display and returns the index.
+    """
+    if hasattr(display, "lut"):
         return create_color(display, idx, r, g, b)
-    else:
-        return display.rgb(r, g, b)
+    return display.rgb(r, g, b)

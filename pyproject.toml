@@ -7,13 +7,8 @@
 requires = ["setuptools", "wheel", "setuptools-scm"]
 
 [project]
-keywords = [
-    "sensor",
-    "micropython",
-    "uplot",
-    "plot",
-    "graphical",
-]name = "micropython-uplot"
+keywords = ["micropython", "uplot", "plot", "graphical"]
+name = "micropython-uplot"
 description = "MicroPython Graphics Library"
 version = "0.0.0+auto.0"
 readme = "README.rst"

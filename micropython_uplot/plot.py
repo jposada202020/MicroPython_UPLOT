@@ -16,7 +16,7 @@ MicroPython Graphics Library
 from micropython_uplot.colors import set_color
 
 try:
-    from typing import Union, Tuple, Optional
+    from typing import Union, Optional
     from typing_extensions import Literal
 except ImportError:
     pass
@@ -39,7 +39,8 @@ class PLOT:
     :param int padding: padding for the plot box in all directions
     :param bool show_box: select if the plot box is displayed
     :param tuple background_color: background color. Defaults to black ``(0, 0, 0)``
-    :param tuple box_color: allows to choose the box line color. Defaults to white ''(255, 255, 255)``
+    :param tuple box_color: allows to choose the box line color.
+     Defaults to white ''(255, 255, 255)``
     :param int tickx_height: x axes tick height in pixels. Defaults to 8.
     :param int ticky_height: y axes tick height in pixels. Defaults to 8.
     :param int scale: scale of the plot. Defaults to 1.
@@ -55,31 +56,30 @@ class PLOT:
         height: int = 100,
         padding: int = 25,
         show_box: bool = True,
-        background_color: int = (0,0,0),
-        box_color: tuple = (255,255,255),
+        background_color: int = (0, 0, 0),
+        box_color: tuple = (255, 255, 255),
         tickx_height: int = 8,
         ticky_height: int = 8,
-
-
     ) -> None:
-        
         self._display = display
-        self._background_color = set_color(display, 0, background_color[0], background_color[1], background_color[2])
+        self._background_color = set_color(
+            display, 0, background_color[0], background_color[1], background_color[2]
+        )
         self._tickcolor = set_color(display, 1, 255, 255, 255)
         self._boxcolor = box_color
 
         self._axesparams = "box"
         self._decimal_points = None
 
-        self._width = x +width
-        self._height = y +height
+        self._width = x + width
+        self._height = y + height
 
         self.padding = padding
         self._newxmin = x + padding
         self._newxmax = x + width - padding - 1
 
-        self._newymin = y +height - padding - 1
-        self._newymax = y +padding
+        self._newymin = y + height - padding - 1
+        self._newymax = y + padding
 
         self._cartesianfirst = True
         self._loggingfirst = True
@@ -104,7 +104,6 @@ class PLOT:
 
         if show_box:
             self._drawbox()
-
 
     def _drawbox(self) -> None:
         """
@@ -203,24 +202,52 @@ class PLOT:
         maxy = max(y)
 
         if ticksx is None:
-            ticksxnorm = tuple([self.transform(0, 100, minx, maxx, _) for _ in ticks_dummy])
-            subticksxnorm = tuple([self.transform(0, 100, minx, maxx, _) for _ in subticks_dummy])
+            ticksxnorm = tuple(
+                [self.transform(0, 100, minx, maxx, _) for _ in ticks_dummy]
+            )
+            subticksxnorm = tuple(
+                [self.transform(0, 100, minx, maxx, _) for _ in subticks_dummy]
+            )
         else:
             ticksxnorm = tuple(ticksx)
 
         if ticksy is None:
-                ticksynorm = tuple([self.transform(0, 100, miny, maxy, _) for _ in ticks_dummy])
-                subticksynorm = tuple([self.transform(0, 100, miny, maxy, _) for _ in subticks_dummy])
+            ticksynorm = tuple(
+                [self.transform(0, 100, miny, maxy, _) for _ in ticks_dummy]
+            )
+            subticksynorm = tuple(
+                [self.transform(0, 100, miny, maxy, _) for _ in subticks_dummy]
+            )
         else:
             ticksynorm = tuple(ticksy)
 
-        ticksxrenorm = tuple([int(self.transform(minx, maxx, self._newxmin, self._newxmax, _)) for _ in ticksxnorm])
-        ticksyrenorm = tuple([int(self.transform(miny, maxy, self._newymin, self._newymax, _)) for _ in ticksynorm])
+        ticksxrenorm = tuple(
+            [
+                int(self.transform(minx, maxx, self._newxmin, self._newxmax, _))
+                for _ in ticksxnorm
+            ]
+        )
+        ticksyrenorm = tuple(
+            [
+                int(self.transform(miny, maxy, self._newymin, self._newymax, _))
+                for _ in ticksynorm
+            ]
+        )
 
         if ticksx is None:
-            subticksxrenorm = tuple([int(self.transform(minx, maxx, self._newxmin, self._newxmax, _)) for _ in subticksxnorm])
+            subticksxrenorm = tuple(
+                [
+                    int(self.transform(minx, maxx, self._newxmin, self._newxmax, _))
+                    for _ in subticksxnorm
+                ]
+            )
         if ticksy is None:
-            subticksyrenorm = tuple([int(self.transform(miny, maxy, self._newymin, self._newymax, _)) for _ in subticksynorm])
+            subticksyrenorm = tuple(
+                [
+                    int(self.transform(miny, maxy, self._newymin, self._newymax, _))
+                    for _ in subticksynorm
+                ]
+            )
 
         for i, tick in enumerate(ticksxrenorm):
             self._display.line(
@@ -235,7 +262,7 @@ class PLOT:
                     "{:.{}f}".format(ticksxnorm[i], self._decimal_points),
                     tick,
                     self._newymin,
-                    ax="x"
+                    ax="x",
                 )
 
         for i, tick in enumerate(ticksyrenorm):
@@ -251,9 +278,8 @@ class PLOT:
                     "{:.{}f}".format(ticksynorm[i], self._decimal_points),
                     self._newxmin,
                     tick,
-                    ax="y"
+                    ax="y",
                 )
-
 
         if ticksx is None:
             for tick in subticksxrenorm:
@@ -304,7 +330,7 @@ class PLOT:
             ((value - oldrangemin) * (newrangemax - newrangemin))
             / (oldrangemax - oldrangemin)
         ) + newrangemin
-    
+
     def tick_params(
         self,
         show_ticks=True,
@@ -337,7 +363,9 @@ class PLOT:
         self._showticks = show_ticks
         self._tickheightx = tickx_height
         self._tickheighty = ticky_height
-        self._tickcolor = set_color(self._display, 1, tickcolor[0], tickcolor[1], tickcolor[2])
+        self._tickcolor = set_color(
+            self._display, 1, tickcolor[0], tickcolor[1], tickcolor[2]
+        )
         self._tickgrid = tickgrid
         self._showtext = showtext
         self._decimal_points = decimal_points
@@ -349,7 +377,7 @@ class PLOT:
         y: int,
         text_color: Optional[int] = None,
         free_text: bool = False,
-        ax = None,
+        ax=None,
     ) -> None:
         """
         Show desired text in the screen
@@ -371,7 +399,6 @@ class PLOT:
         if ax == "x":
             x = x - font_width // 2
             y = y + font_height
-        
 
         if text_color is None:
             text_color = self._tickcolor
