@@ -1,0 +1,8 @@
+{
+  "urls": [
+    ["micropython_uplot/__init__.py", "github:jposada202020/MicroPython_UPLOT/micropython_uplot/__init__.py"],
+    ["micropython_uplot/i2c_helpers.py", "github:jposada202020/MicroPython_UPLOT/micropython_uplot/i2c_helpers.py"],
+    ["micropython_uplot/uplot.py", "github:jposada202020/MicroPython_UPLOT/micropython_uplot/uplot.py"]
+  ],
+  "version": "1"
+}

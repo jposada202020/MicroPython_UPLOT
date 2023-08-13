@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: 2022 Kattni Rembor, written for Adafruit Industries
+#
+# SPDX-License-Identifier: MIT
+
+*.mpy
+__pycache__
+*.pyc
+_build
+*.egg-info
+.env
+.venv
+*.DS_Store
+.idea
+.vscode
+*~
