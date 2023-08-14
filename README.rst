@@ -26,7 +26,7 @@ MicroPython Graphics Library. This is adapted to use Peter Hinch display driver.
 However Colors will be needed to be adapted. This library uses an WaveShare 3.5 display
 IL9486
 
-.. image:: https://github.com/jposada202020/CircuitPython_uplot/blob/main/docs/readme1.png
+.. image:: https://github.com/jposada202020/MicroPython_UPLOT/blob/main/docs/readme1.png
 
 
 Installing with mip
