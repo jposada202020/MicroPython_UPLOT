@@ -25,9 +25,9 @@ __version__ = "0.0.0+auto.0"
 __repo__ = "https://github.com/jposada202020/MicroPython_UPLOT.git"
 
 
-_TRIANGLE = array("h", [0, 0, 8, 0, 4, -7])
-_SQUARE = array("h", [0, 0, 6, 0, 6, -6, 0, -6])
-_DIAMOND = array("h", [0, 0, 3, -4, 6, 0, 3, 4])
+_TRIANGLE = array("i", [0, 0, 8, 0, 4, -7])
+_SQUARE = array("i", [0, 0, 6, 0, 6, -6, 0, -6])
+_DIAMOND = array("i", [0, 0, 3, -4, 6, 0, 3, 4])
 
 
 class Scatter:
@@ -45,6 +45,7 @@ class Scatter:
         radius: Optional[Union[list, int]] = 3,
         pointer_color: tuple = (0, 255, 0),
         pointer: Optional[str] = None,
+        pointer_index=None,
     ) -> None:
         """
 
@@ -64,10 +65,15 @@ class Scatter:
         else:
             self._pointer = pointer
 
+        if pointer_index is None:
+            self._pointer_index = plot._pointer_index
+        else:
+            self._pointer_index = pointer_index
+
         self._radius = radius
         self._pointer_color = set_color(
             plot._display,
-            plot._pointer_index,
+            self._pointer_index,
             pointer_color[0],
             pointer_color[1],
             pointer_color[2],

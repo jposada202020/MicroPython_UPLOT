@@ -73,4 +73,3 @@ Scatter(
 )
 
 display.show()
-plot.savingppm("newfile.ppm")

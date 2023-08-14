@@ -89,7 +89,6 @@ class PLOT:
         self._cartesianfirst = True
         self._loggingfirst = True
         self._scatterfirst = True
-
         self._showtext = False
 
         self._tickheightx = tickx_height
@@ -115,7 +114,7 @@ class PLOT:
         :return: None
 
         """
-        self._display.fill(self._background_color)
+        # self._display.fill(self._background_color)
 
         if self._axesparams == "cartesian":
             draw_box = [True, True, False, False]
@@ -129,7 +128,7 @@ class PLOT:
             # y axes line
             self._display.line(
                 self._newxmin,
-                self._newxmin,
+                self._newymax,
                 self._newxmin,
                 self._height - self.padding - 1,
                 self._boxcolor,
@@ -147,7 +146,7 @@ class PLOT:
         if draw_box[2]:
             self._display.line(
                 self._width - self.padding - 1,
-                self._newxmin,
+                self._newymax,
                 self._width - self.padding - 1,
                 self._height - self.padding - 1,
                 self._boxcolor,
@@ -156,9 +155,9 @@ class PLOT:
         if draw_box[3]:
             self._display.line(
                 self._newxmin,
-                self._newxmin,
+                self._newymax,
                 self._width - self.padding - 1,
-                self._newxmin,
+                self._newymax,
                 self._boxcolor,
             )
 
@@ -485,9 +484,11 @@ class PLOT:
             self._color0,
             self._color2,
             self._color1,
-            (255, 255, 0),
-            (255, 69, 69),
-            (34, 98, 129),
+            (255, 255, 255),
+            (0, 255, 0),
+            (255, 255, 94),
+            (255, 255, 255),
+            (255, 50, 255),
         ]
 
         # Header values for the file
@@ -503,8 +504,6 @@ class PLOT:
 
             for y in range(height):
                 for x in range(width):
-                    if self._display.pixel(x, y) > 5:
-                        print(self._display.pixel(x, y))
                     ppmfile.write(
                         b"%c%c%c"
                         % (

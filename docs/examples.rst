@@ -33,3 +33,14 @@ Scatter example using different datasets
 .. literalinclude:: ../examples/scatter_different_datasets.py
     :caption: examples/scatter_different_datasets.py
     :lines: 5-
+.. image:: ../docs/scatter_datasets.jpg
+
+Scatter Different Pointers
+----------------------------
+
+Scatter example using different Pointers
+
+.. literalinclude:: ../examples/scatter_pointers.py
+    :caption: examples/scatter_pointers.py
+    :lines: 5-
+.. image:: ../docs/scatter_pointers.jpg
