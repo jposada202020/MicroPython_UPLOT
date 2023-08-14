@@ -66,10 +66,12 @@ class PLOT:
             display, 0, background_color[0], background_color[1], background_color[2]
         )
         self._tickcolor = set_color(display, 1, 255, 255, 255)
-        self._boxcolor = box_color
+        self._boxcolor = set_color(display, 2, box_color[0], box_color[1], box_color[2])
 
         self._axesparams = "box"
         self._decimal_points = None
+        self._buff_width = width
+        self._buf_height = height
 
         self._width = x + width
         self._height = y + height
@@ -96,11 +98,9 @@ class PLOT:
         self._grid_espace = 2
         self._grid_lenght = 2
 
-        self._barcolor = 0x69FF8F
-
-        self._piecolor = 0x8B77FF
-
         self._index_colorused = 4
+
+        self._pointer_index = 3
 
         if show_box:
             self._drawbox()
@@ -193,7 +193,6 @@ class PLOT:
         :return:None
 
         """
-
         ticks_dummy = (10, 30, 50, 70, 90)
         subticks_dummy = (20, 40, 60, 80)
         minx = min(x)
@@ -363,9 +362,11 @@ class PLOT:
         self._showticks = show_ticks
         self._tickheightx = tickx_height
         self._tickheighty = ticky_height
+
         self._tickcolor = set_color(
             self._display, 1, tickcolor[0], tickcolor[1], tickcolor[2]
         )
+
         self._tickgrid = tickgrid
         self._showtext = showtext
         self._decimal_points = decimal_points
@@ -447,3 +448,17 @@ class PLOT:
                     self._tickcolor,
                 )
                 start = start - self._grid_espace - self._grid_lenght
+
+    def writeplainpbm(self, file):
+        """
+        Function to write a plain pbm file
+        """
+        with open(file, "wb") as file_write:
+            file_write.write("P1" + "\n")
+            file_write.write(str(480) + " " + str(320) + "\n")
+            for y in range(320):
+                for x in range(480):
+                    print(str(self._display.pixel(x, y)))
+                    file_write.write(str(self._display.pixel(x, y)))
+                file_write.write("\n")
+            file_write.close()
