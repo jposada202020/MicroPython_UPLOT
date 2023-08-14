@@ -47,3 +47,13 @@ Scatter example using different Pointers
     :caption: examples/scatter_pointers.py
     :lines: 5-
 .. image:: ../docs/scatter_pointers.jpg
+
+Bar Simple Test
+----------------------------
+
+Bar Simple Test
+
+.. literalinclude:: ../examples/bar_simpletest.py
+    :caption: examples/bar_simpletest.py
+    :lines: 5-
+.. image:: ../docs/bar.jpg
