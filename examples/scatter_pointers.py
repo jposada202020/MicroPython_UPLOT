@@ -6,7 +6,6 @@ import gc
 from random import choice
 from machine import Pin, SPI
 from ili9486 import ILI9486
-from micropython_uplot.colors import create_color
 from micropython_uplot.plot import PLOT
 from micropython_uplot.utils import linspace
 from micropython_uplot.scatter import Scatter, Pointer
@@ -20,23 +19,11 @@ gc.collect()
 display = ILI9486(spi, pcs, pdc, prst)
 
 plot = PLOT(display, 0, 0, display.width // 2, display.height // 2, padding=1)
-# plot.tick_params(tickx_height=12, ticky_height=12, tickcolor=(255, 0, 8), tickgrid=True)
-
 plot2 = PLOT(display, 240, 0, display.width // 2, display.height // 2, padding=1)
-# plot2.tick_params(
-#     # tickx_height=6, ticky_height=6, tickcolor=(147, 150, 151), tickgrid=True
-# )
-
 plot3 = PLOT(display, 0, 160, display.width // 2, display.height // 2, padding=1)
-# plot3.tick_params(
-#     tickx_height=6, ticky_height=6, tickcolor=(147, 150, 151), tickgrid=False
-# )
-
 plot4 = PLOT(display, 240, 160, display.width // 2, display.height // 2, padding=1)
 
-# Setting up tick parameters
-
-
+# Creating some Data
 a = list(linspace(1, 100, 100))
 b = [choice(a) for _ in a]
 Scatter(plot, a, b, pointer_index=4)
@@ -51,5 +38,3 @@ Scatter(
 )
 
 display.show()
-
-plot._savingppm()
