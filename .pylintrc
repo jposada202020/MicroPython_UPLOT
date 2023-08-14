@@ -14,7 +14,7 @@ unsafe-load-any-extension=no
 
 [MESSAGES CONTROL]
 confidence=
-disable=raw-checker-failed,bad-inline-option,locally-disabled,file-ignored,suppressed-message,useless-suppression,deprecated-pragma,import-error,pointless-string-statement,unspecified-encoding,protected-access,consider-using-generator
+disable=raw-checker-failed,bad-inline-option,locally-disabled,file-ignored,suppressed-message,useless-suppression,deprecated-pragma,import-error,pointless-string-statement,unspecified-encoding,protected-access,consider-using-generator,too-few-public-methods
 enable=
 
 [REPORTS]

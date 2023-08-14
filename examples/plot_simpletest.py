@@ -27,3 +27,5 @@ my_plot._draw_ticks(x, y)
 
 
 display.show()
+
+# my_plot.savingppm()

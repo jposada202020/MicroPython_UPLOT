@@ -6,7 +6,6 @@ Introduction
     :target: https://micropython-uplot.readthedocs.io/en/latest/
     :alt: Documentation Status
 
-
 .. image:: https://img.shields.io/badge/micropython-Ok-purple.svg
     :target: https://micropython.org
     :alt: micropython
@@ -23,7 +22,11 @@ Introduction
     :target: https://github.com/psf/black
     :alt: Code Style: Black
 
-MicroPython Graphics Library
+MicroPython Graphics Library. This is adapted to use Peter Hinch display driver.
+However Colors will be needed to be adapted. This library uses an WaveShare 3.5 display
+IL9486
+
+.. image:: https://github.com/jposada202020/CircuitPython_uplot/blob/main/docs/readme1.png
 
 
 Installing with mip

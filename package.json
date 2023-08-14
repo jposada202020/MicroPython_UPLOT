@@ -1,8 +1,25 @@
 {
   "urls": [
-    ["micropython_uplot/__init__.py", "github:jposada202020/MicroPython_UPLOT/micropython_uplot/__init__.py"],
-    ["micropython_uplot/i2c_helpers.py", "github:jposada202020/MicroPython_UPLOT/micropython_uplot/i2c_helpers.py"],
-    ["micropython_uplot/uplot.py", "github:jposada202020/MicroPython_UPLOT/micropython_uplot/uplot.py"]
+    [
+      "micropython_uplot/__init__.py",
+      "github:jposada202020/MicroPython_UPLOT/micropython_uplot/__init__.py"
+    ],
+    [
+      "micropython_uplot/colors.py",
+      "github:jposada202020/MicroPython_UPLOT/micropython_uplot/colors.py"
+    ],
+    [
+      "micropython_uplot/plot.py",
+      "github:jposada202020/MicroPython_UPLOT/micropython_uplot/plot.py"
+    ],
+    [
+      "micropython_uplot/scatter.py",
+      "github:jposada202020/MicroPython_UPLOT/micropython_uplot/scatter.py"
+    ],
+    [
+      "micropython_uplot/utils.py",
+      "github:jposada202020/MicroPython_UPLOT/micropython_uplot/utils.py"
+    ]
   ],
   "version": "1"
 }

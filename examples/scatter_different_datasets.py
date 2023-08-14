@@ -29,8 +29,8 @@ plot.tick_params(
 )
 
 
-a = list(linspace(4, 200, 50))
-z = [4, 5, 6, 7, 8]
+a = list(linspace(10, 200, 50))
+z = [2, 3, 4, 5, 6]
 radi = [choice(z) for _ in a]
 b = [choice(a) for _ in a]
 Scatter(
@@ -73,3 +73,4 @@ Scatter(
 )
 
 display.show()
+plot.savingppm("newfile.ppm")

@@ -12,13 +12,11 @@ scatter plot for micropython_uplot
 
 
 """
-
-from micropython_uplot.colors import set_color
 from array import array
+from micropython_uplot.colors import set_color
 
 try:
     from typing import Union, Optional
-    from typing_extensions import Literal
     from micropython_uplot.plot import PLOT
 except ImportError:
     pass

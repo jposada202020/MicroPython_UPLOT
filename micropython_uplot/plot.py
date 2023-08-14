@@ -43,7 +43,6 @@ class PLOT:
      Defaults to white ''(255, 255, 255)``
     :param int tickx_height: x axes tick height in pixels. Defaults to 8.
     :param int ticky_height: y axes tick height in pixels. Defaults to 8.
-    :param int scale: scale of the plot. Defaults to 1.
 
     """
 
@@ -65,8 +64,12 @@ class PLOT:
         self._background_color = set_color(
             display, 0, background_color[0], background_color[1], background_color[2]
         )
+
         self._tickcolor = set_color(display, 1, 255, 255, 255)
         self._boxcolor = set_color(display, 2, box_color[0], box_color[1], box_color[2])
+        self._color0 = background_color
+        self._color1 = box_color
+        self._color2 = (255, 255, 255)
 
         self._axesparams = "box"
         self._decimal_points = None
@@ -366,6 +369,7 @@ class PLOT:
         self._tickcolor = set_color(
             self._display, 1, tickcolor[0], tickcolor[1], tickcolor[2]
         )
+        self._color2 = tickcolor
 
         self._tickgrid = tickgrid
         self._showtext = showtext
@@ -395,7 +399,7 @@ class PLOT:
         distance = 5
 
         if ax == "y":
-            x = x - font_width - distance
+            x = x - font_width * (len(text)) - distance
             y = y - font_height // 2
         if ax == "x":
             x = x - font_width // 2
@@ -449,16 +453,64 @@ class PLOT:
                 )
                 start = start - self._grid_espace - self._grid_lenght
 
-    def writeplainpbm(self, file):
+    def _writeplainpbm(self, file: str = "newfile.pbm"):
         """
         Function to write a plain pbm file
+        adapted from https://github.com/orgs/micropython/discussions/10785
+        Author: Stewart Russell
         """
         with open(file, "wb") as file_write:
             file_write.write("P1" + "\n")
             file_write.write(str(480) + " " + str(320) + "\n")
             for y in range(320):
                 for x in range(480):
-                    print(str(self._display.pixel(x, y)))
                     file_write.write(str(self._display.pixel(x, y)))
                 file_write.write("\n")
             file_write.close()
+
+    def _savingppm(self, filename: str = "picture.ppm", width=480, height=320):
+        """
+        Function to save the screen as a ppm file
+        Adapted from https://gist.github.com/nicholasRutherford/c95a55239e03ba99bab3
+        Author: Nicholas Rutherford
+
+        :param str filename: picture filename
+        :param int width: screenshot width in pixels
+        :param int height: screenshot height in pixels
+
+        This function requires adding the colors used manually in the z list
+        """
+
+        z = [
+            self._color0,
+            self._color2,
+            self._color1,
+            (255, 255, 0),
+            (255, 69, 69),
+            (34, 98, 129),
+        ]
+
+        # Header values for the file
+        comment = b"MicroPlot"
+        ftype = b"P6"
+
+        # First write the header values
+        with open(filename, "wb+") as ppmfile:
+            ppmfile.write(b"%s\n" % (ftype))
+            ppmfile.write(b"#%s\n" % comment)
+            ppmfile.write(b"%d %d\n" % (width, height))
+            ppmfile.write(b"255\n")
+
+            for y in range(height):
+                for x in range(width):
+                    if self._display.pixel(x, y) > 5:
+                        print(self._display.pixel(x, y))
+                    ppmfile.write(
+                        b"%c%c%c"
+                        % (
+                            z[self._display.pixel(x, y)][0],
+                            z[self._display.pixel(x, y)][1],
+                            z[self._display.pixel(x, y)][2],
+                        )
+                    )
+            ppmfile.close()

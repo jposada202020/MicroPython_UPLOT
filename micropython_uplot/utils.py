@@ -14,13 +14,17 @@ Plot Utilities
 """
 
 
-# Taken from https://stackoverflow.com/questions/12334442/does-python-have-a-linspace-function-in-its-std-lib
+# Taken from
+# https://stackoverflow.com/questions/12334442/does-python-have-a-linspace-function-in-its-std-lib
 
 
 def linspace(start, stop, n):
+    """
+    Creates a linearspace
+    """
     if n == 1:
         yield stop
         return
-    h = (stop - start) / (n - 1)
+    delta = (stop - start) / (n - 1)
     for i in range(n):
-        yield start + h * i
+        yield start + delta * i
