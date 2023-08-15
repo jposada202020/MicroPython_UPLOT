@@ -49,15 +49,16 @@ class Cartesian:
         """
 
         :param Plot plot: Plot object for the scatter to be drawn
-        :param list|ulab.numpy.linspace|ulab.numpy.ndarray x: x points coordinates
-        :param list|ulab.numpy.linspace|ulab.numpy.ndarray y: y points coordinates
+        :param list x: x points coordinates
+        :param list y: y points coordinates
         :param list|None rangex: x range limits. Defaults to None
         :param list|None rangey: y range limits. Defaults to None
         :param int|None line_color: line color. Defaults to None
         :param str|None line_style: line style. Defaults to None
-        :param np.array|list ticksx: X axis ticks values
-        :param np.array|list ticksy: Y axis ticks values
+        :param list ticksx: X axis ticks values
+        :param list ticksy: Y axis ticks values
         :param bool fill: Show the filling. Defaults to `False`
+        :param int|None pointer_index: Pointer index. Defaults to None
 
         """
         self.points = []

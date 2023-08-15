@@ -326,7 +326,6 @@ class PLOT:
         :return int|float: converted value
 
         """
-
         return (
             ((value - oldrangemin) * (newrangemax - newrangemin))
             / (oldrangemax - oldrangemin)
@@ -484,9 +483,9 @@ class PLOT:
             self._color0,
             self._color2,
             self._color1,
-            (255, 89, 0),
-            (255, 89, 0),
-            (255, 89, 0),
+            (0, 255, 0),
+            (255, 0, 0),
+            (255, 0, 0),
             (0, 94, 153),
             (0, 167, 109),
         ]

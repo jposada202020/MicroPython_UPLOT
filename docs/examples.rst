@@ -30,6 +30,17 @@ Cartesian Curve fill
     :lines: 5-
 .. image:: ../docs/cartesian_fill.jpg
 
+
+Cartesian Trig functions
+----------------------------
+
+Cartesian Trigonometric functions example
+
+.. literalinclude:: ../examples/cartesian_trig_functions.py
+    :caption: examples/cartesian_trig_functions.py
+    :lines: 5-
+.. image:: ../docs/cartesian_trig.jpg
+
 Scatter Simple Test
 ---------------------
 
