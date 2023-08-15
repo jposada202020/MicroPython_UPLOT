@@ -8,6 +8,18 @@ Ensure your device works with this simple test.
     :lines: 5-
 .. image:: ../docs/plot.jpg
 
+
+Cartesian Simple Test
+----------------------------
+
+Cartesian Simple Test
+
+.. literalinclude:: ../examples/cartesian_simpletest.py
+    :caption: examples/cartesian_simpletest.py
+    :lines: 5-
+.. image:: ../docs/cartesian_simpletest.jpg
+
+
 Scatter Simple Test
 ---------------------
 

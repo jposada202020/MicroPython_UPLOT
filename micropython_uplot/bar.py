@@ -7,7 +7,7 @@
 `bar`
 ================================================================================
 
-MicroPython scatter graph
+MicroPython bar graph
 
 * Author: Jose D. Montoya
 
@@ -18,7 +18,7 @@ try:
     from micropython_uplot.plot import PLOT
 except ImportError:
     pass
-from math import sin, cos, ceil
+from math import ceil
 from micropython_uplot.colors import set_color
 
 __version__ = "0.0.0+auto.0"
@@ -38,7 +38,6 @@ class Bar:
         plot: PLOT,
         x: list,
         y: list,
-        color: tuple = (255, 255, 255),
         fill: bool = False,
         bar_space=16,
         xstart=50,
@@ -49,7 +48,6 @@ class Bar:
         :param Plot plot: Plot object for the scatter to be drawn
         :param list x: x data
         :param list y: y data
-        :param int color: boxes color. Defaults to const:``0xFFFFFF``
         :param bool fill: boxes fill attribute. Defaults to `False`
         :param int bar_space: space in pixels between the bars
         :param int xstart: start point in the x axis for the bar to start. Defaults to :const:`50`
@@ -61,7 +59,6 @@ class Bar:
          folder showing this functionality
 
         """
-        print(plot._pointer_index)
         self._plot_obj = plot
         self._filled = fill
         self._plot_palette = []
@@ -98,10 +95,10 @@ class Bar:
                 )
                 plot._pointer_index += 1
 
-        self._y = [i for i in y]
+        self._y = y
 
         if max_value is None:
-            y_max = max(self._y)
+            y_max = max(y)
         else:
             y_max = max_value
 

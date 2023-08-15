@@ -45,7 +45,7 @@ class Scatter:
         radius: Optional[Union[list, int]] = 3,
         pointer_color: tuple = (0, 255, 0),
         pointer: Optional[str] = None,
-        pointer_index=None,
+        pointer_index: Optional[int] = None,
     ) -> None:
         """
 
@@ -57,6 +57,7 @@ class Scatter:
         :param int|list radius: circle radius
         :param int pointer_color: pointer color. Default is 0xFF905D
         :param str|None pointer: pointer shape.
+        :param int|None pointer_index: pointer index. Default is None
 
         """
 
