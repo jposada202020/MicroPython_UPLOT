@@ -25,9 +25,12 @@ Introduction
 MicroPython Graphics Library. This library uses the IL9486 driver from Peter Hinch taken from
 https://github.com/peterhinch/micropython-nano-gui. with a Waveshare 3.5 display
 This library uses FrameBuffer. It could work for other displays, however, is not my intention to
-apadated or provide this functionality. This is an exercise to learn MicroPython Graphics adapting
+adapt or provide this functionality. This is an exercise to learn MicroPython Graphics adapting
 the following library from CircuitPython
 https://github.com/jposada202020/CircuitPython_uplot
+
+Take a look in the `examples <https://micropython-uplot.readthedocs.io/en/latest/examples.html>`_ section in RTD to see the gallery
+
 
 .. image:: https://github.com/jposada202020/MicroPython_UPLOT/blob/main/docs/readme1.png
 
