@@ -14,11 +14,12 @@ MicroPython cartesian graph
 
 """
 try:
-    from typing import Optional, Union
+    from typing import Optional
     from micropython_uplot.plot import PLOT
 except ImportError:
     pass
 
+from array import array
 from micropython_uplot.colors import set_color
 
 
@@ -129,13 +130,14 @@ class Cartesian:
             ]
         )
 
-        # if fill:
-        #     self.points.extend([xnorm[0], plot._newymin])
-        #     for index, item in enumerate(xnorm):
-        #         self.points.extend([item, ynorm[index]])
-        #     self.points.extend([xnorm[-1], plot._newymin])
-        #     self.points.extend([xnorm[0], plot._newymin])
-        #     plot._display.poly(0, 0, self.points, plot._pointer_color, True)
+        if fill:
+            self.points.extend([xnorm[0], plot._newymin])
+            for index, item in enumerate(xnorm):
+                self.points.extend([item, ynorm[index]])
+            self.points.extend([xnorm[-1], plot._newymin])
+            self.points.extend([xnorm[0], plot._newymin])
+            array_points = array("i", self.points)
+            plot._display.poly(0, 0, array_points, self._line_color, True)
 
         for index, _ in enumerate(xnorm):
             if index + 1 >= len(xnorm):

@@ -3,7 +3,6 @@
 # SPDX-License-Identifier: MIT
 
 import gc
-import math
 from machine import Pin, SPI
 from ili9486 import ILI9486
 from micropython_uplot.plot import PLOT
@@ -18,16 +17,16 @@ spi = SPI(1, sck=Pin(10), mosi=Pin(11), miso=Pin(12), baudrate=30_000_000)
 gc.collect()
 display = ILI9486(spi, pcs, pdc, prst)
 
-plot = PLOT(display, 5, 5, 300, 250, padding=1, box_color=(255, 255, 255))
+plot = PLOT(display, 5, 5, 460, 150, padding=1, box_color=(255, 255, 255))
 plot.tick_params(
     tickx_height=12, ticky_height=12, tickcolor=(100, 100, 100), tickgrid=True
 )
 
 # Creating some points to graph
-x = list(linspace(-4, 4, 25))
-constant = 1.0 / math.sqrt(2 * math.pi)
-y = [constant * math.exp((-(_**2)) / 2.0) for _ in x]
+x = list(linspace(0, 4, 25))
+y = [value * (value - 2) ** 2 for value in x]
+
 # Drawing the graph
-Cartesian(plot, x, y, line_color=(255, 255, 0))
+Cartesian(plot, x, y, rangey=[-1, 18], line_color=(255, 89, 0), fill=True)
 
 display.show()

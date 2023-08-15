@@ -20,6 +20,16 @@ Cartesian Simple Test
 .. image:: ../docs/cartesian_simpletest.jpg
 
 
+Cartesian Fill
+----------------------------
+
+Cartesian Curve fill
+
+.. literalinclude:: ../examples/cartesian_fill.py
+    :caption: examples/cartesian_fill.py
+    :lines: 5-
+.. image:: ../docs/cartesian_fill.jpg
+
 Scatter Simple Test
 ---------------------
 

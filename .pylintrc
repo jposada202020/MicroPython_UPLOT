@@ -115,7 +115,7 @@ max-locals=25
 max-parents=7
 max-public-methods=20
 max-returns=6
-max-statements=50
+max-statements=60
 min-public-methods=1
 
 [EXCEPTIONS]
