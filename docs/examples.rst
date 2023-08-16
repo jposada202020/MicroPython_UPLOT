@@ -19,6 +19,16 @@ Cartesian Simple Test
     :lines: 5-
 .. image:: ../docs/cartesian_simpletest.jpg
 
+Cartesian Line Types
+----------------------------
+
+Cartesian Line Types examples
+
+.. literalinclude:: ../examples/cartesian_linetypes.py
+    :caption: examples/cartesian_linetypes.py
+    :lines: 5-
+.. image:: ../docs/line_types.jpg
+
 
 Cartesian Fill
 ----------------------------

@@ -4,10 +4,10 @@
 
 """
 
-`cartesian`
+`logging`
 ================================================================================
 
-MicroPython cartesian graph
+MicroPython logging utility
 
 * Author: Jose D. Montoya
 
@@ -19,7 +19,6 @@ try:
 except ImportError:
     pass
 
-from array import array
 from micropython_uplot.colors import set_color
 
 
@@ -27,9 +26,9 @@ __version__ = "0.0.0+auto.0"
 __repo__ = "https://github.com/adafruit/MicroPython_UPLOT.git"
 
 
-class Cartesian:
+class Logging:
     """
-    Class to draw cartesian plane
+    Class to log data
     """
 
     def __init__(
@@ -40,11 +39,8 @@ class Cartesian:
         rangex: Optional[list] = None,
         rangey: Optional[list] = None,
         line_color: tuple = (0, 255, 0),
-        line_style: Optional[str] = None,
         ticksx: list = None,
         ticksy: list = None,
-        fill: bool = False,
-        pointer_index: Optional[int] = None,
     ) -> None:
         """
 
@@ -54,21 +50,13 @@ class Cartesian:
         :param list|None rangex: x range limits. Defaults to None
         :param list|None rangey: y range limits. Defaults to None
         :param int|None line_color: line color. Defaults to None
-        :param str|None line_style: line style. Defaults to None
         :param list ticksx: X axis ticks values
         :param list ticksy: Y axis ticks values
-        :param bool fill: Show the filling. Defaults to `False`
-        :param int|None pointer_index: Pointer index. Defaults to None
 
         """
         self.points = []
         self.ticksx = ticksx
         self.ticksy = ticksy
-
-        if pointer_index is None:
-            self._pointer_index = plot._pointer_index
-        else:
-            self._pointer_index = pointer_index
 
         self._line_color = set_color(
             plot._display,
@@ -78,14 +66,6 @@ class Cartesian:
             line_color[2],
         )
         plot._pointer_index += 1
-
-        if line_style is None:
-            self._line_type = "-"
-        else:
-            self._line_type = line_style
-
-        if self._line_type not in ["-", ".", "- -", "-.-"]:
-            raise ValueError("line_style must be a valid option")
 
         max_x = max(x)
         min_x = min(x)
@@ -128,15 +108,6 @@ class Cartesian:
             ]
         )
 
-        if fill:
-            self.points.extend([xnorm[0], plot._newymin])
-            for index, item in enumerate(xnorm):
-                self.points.extend([item, ynorm[index]])
-            self.points.extend([xnorm[-1], plot._newymin])
-            self.points.extend([xnorm[0], plot._newymin])
-            array_points = array("i", self.points)
-            plot._display.poly(0, 0, array_points, self._line_color, True)
-
         for index, _ in enumerate(xnorm):
             if index + 1 >= len(xnorm):
                 break
@@ -150,20 +121,6 @@ class Cartesian:
                 plot._draw_ticks(x, y, self.ticksx, self.ticksy)
                 plot._cartesianfirst = False
                 plot._showticks = False
-
-    def _draw_plotline(self, plot, index, xnorm, ynorm):
-        if self._line_type == "-":
-            self._plot_line(plot, index, xnorm, ynorm)
-        elif self._line_type == "-.-":
-            if index % 3 == 0:
-                self._plot_line(plot, index, xnorm, ynorm)
-            else:
-                plot._display.pixel(xnorm[index], ynorm[index], self._line_color)
-        elif self._line_type == ".":
-            plot._display.pixel(xnorm[index], ynorm[index], self._line_color)
-        elif self._line_type == "- -":
-            if index % 2 == 0:
-                self._plot_line(plot, index, xnorm, ynorm)
 
     def _plot_line(self, plot, index, xnorm, ynorm):
         plot._display.line(
@@ -179,14 +136,3 @@ class Cartesian:
         Update the plot with new data
         """
         plot._display.fill(0)
-
-
-class LineStyle:
-    """
-    Line style class
-    """
-
-    SOLID = "-"
-    DASHED = "- -"
-    DASH_DOT = "-.-"
-    DOTTED = "."
