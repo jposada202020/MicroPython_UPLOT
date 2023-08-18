@@ -2,7 +2,6 @@
 #
 # SPDX-License-Identifier: MIT
 
-import time
 import gc
 import math
 from machine import Pin, SPI
@@ -27,8 +26,4 @@ y = [constant * math.exp((-(_**2)) / 2.0) for _ in x]
 # Drawing the graph
 my_log = Logging(plot, x, y, rangex=[-4, 4], rangey=[0, 1], line_color=(255, 255, 0))
 
-display.show()
-time.sleep(1)
-
-my_log.update(plot)
 display.show()

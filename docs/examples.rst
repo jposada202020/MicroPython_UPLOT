@@ -100,3 +100,23 @@ Bar Simple Test
     :caption: examples/bar_simpletest.py
     :lines: 5-
 .. image:: ../docs/bar.jpg
+
+Logging Simple Test
+----------------------------
+
+Logging Simple Test
+
+.. literalinclude:: ../examples/logging_simpletest.py
+    :caption: examples/logging_simpletest.py
+    :lines: 5-
+.. image:: ../docs/logging_simpletest.jpg
+
+Logging Animation
+----------------------------
+
+Logging Animation
+
+.. literalinclude:: ../examples/logging_animation.py
+    :caption: examples/logging_animation.py
+    :lines: 5-
+.. image:: ../docs/logging_animation.jpg

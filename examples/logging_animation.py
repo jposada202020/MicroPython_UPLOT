@@ -5,11 +5,9 @@
 import time
 import random
 import gc
-import math
 from machine import Pin, SPI
 from ili9486 import ILI9486
 from micropython_uplot.plot import PLOT
-from micropython_uplot.utils import linspace
 from micropython_uplot.logging import Logging
 
 # Pin definition
@@ -66,7 +64,7 @@ my_loggraph = Logging(
     y[0:dist],
     rangex=[0, 210],
     rangey=[0, 110],
-    line_color=(0, 0, 255),
+    line_color=(0, 255, 0),
     ticksx=[25, 50, 75, 100, 125, 150, 175, 200],
     ticksy=[25, 50, 75, 100],
 )
