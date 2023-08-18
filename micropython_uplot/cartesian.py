@@ -174,12 +174,6 @@ class Cartesian:
             self._line_color,
         )
 
-    def update(self, plot):
-        """
-        Update the plot with new data
-        """
-        plot._display.fill(0)
-
 
 class LineStyle:
     """

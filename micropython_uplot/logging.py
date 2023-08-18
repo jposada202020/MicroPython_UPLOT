@@ -39,24 +39,31 @@ class Logging:
         rangex: Optional[list] = None,
         rangey: Optional[list] = None,
         line_color: tuple = (0, 255, 0),
-        ticksx: list = None,
-        ticksy: list = None,
+        ticksx: list = (0, 10, 30, 50, 70, 90),
+        ticksy: list = (0, 10, 30, 50, 70, 90),
+        tick_pos: bool = False,
+        fill: bool = False,
     ) -> None:
         """
 
         :param Plot plot: Plot object for the scatter to be drawn
         :param list x: x points coordinates
         :param list y: y points coordinates
-        :param list|None rangex: x range limits. Defaults to None
+        :param list|None rangex: x range limits. Defaults to Nonem
         :param list|None rangey: y range limits. Defaults to None
         :param int|None line_color: line color. Defaults to None
         :param list ticksx: X axis ticks values
         :param list ticksy: Y axis ticks values
+        :param bool tick_pos: indicates ticks position. True for below the axes.
+         Defaults to ``False``
+        :param bool fill: enable the filling of the plot. Defaults to ``False``
 
         """
         self.points = []
-        self.ticksx = ticksx
-        self.ticksy = ticksy
+        self.ticksx = tuple(ticksx)
+        self.ticksy = tuple(ticksy)
+
+        self._pointer_index = plot._pointer_index
 
         self._line_color = set_color(
             plot._display,
@@ -67,26 +74,72 @@ class Logging:
         )
         plot._pointer_index += 1
 
-        max_x = max(x)
-        min_x = min(x)
-        max_y = max(y)
-        min_y = min(y)
-
-        if rangex is None:
-            self.xmin = min_x - (abs(max_x - min_x) / 10)
-            self.xmax = max_x + (abs(max_x - min_x) / 10)
-
+        if tick_pos:
+            self._tickposx = plot._tickheightx
+            self._tickposy = plot._tickheighty
         else:
-            self.xmin = min(rangex)
-            self.xmax = max(rangex)
+            self._tickposx = 0
+            self._tickposy = 0
 
-        if rangey is None:
-            self.ymin = min_y - (abs(max_y - min_y) / 10)
-            self.ymax = max_y + (abs(max_y - min_y) / 10)
-        else:
-            self.ymin = min(rangey)
-            self.ymax = max(rangey)
+        self.xmin = rangex[0]
+        self.xmax = rangex[1]
+        self.ymin = rangey[0]
+        self.ymax = rangey[1]
 
+        self.draw_points(plot, x, y, fill)
+        if plot._showticks:
+            if plot._loggingfirst:
+                plot._loggingfirst = False
+                self._draw_ticks(plot)
+                plot._showticks = False
+
+    def _plot_line(self, plot, index, xnorm, ynorm):
+        plot._display.line(
+            xnorm[index],
+            ynorm[index],
+            xnorm[index + 1],
+            ynorm[index + 1],
+            self._line_color,
+        )
+
+    def draw_points(self, plot: PLOT, x: list, y: list, fill: bool = False) -> None:
+        """
+        Draws points in the plot
+        :param Plot plot: plot object provided
+        :param list x: list of x values
+        :param list y: list of y values
+        :param bool fill: parameter to fill the plot graphic. Defaults to False
+        :return: None
+        """
+        self.clear_plot(plot)
+        # if self._limits:
+        #     self._draw_limit_lines(plot)
+        self.draw_new_lines(plot, x, y, fill)
+
+    @staticmethod
+    def clear_plot(plot) -> None:
+        """
+        Clears the plot area
+        """
+
+        plot._display.rect(
+            plot._newxmin + 1 + plot._tickheightx,
+            plot._newymax + 1,
+            plot._buff_width - 2 - 2 * plot.padding - plot._tickheightx,
+            plot._buff_height - 2 - 2 * plot.padding - plot._tickheighty,
+            plot._background_color,
+            True,
+        )
+
+    def draw_new_lines(self, plot: PLOT, x: list, y: list, fill: bool = False) -> None:
+        """
+        Draw the plot lines
+        :param Plot plot: plot object provided
+        :param list x: list of x values
+        :param list y: list of y values
+        :param bool fill: parameter to fill the plot graphic. Defaults to False
+        :return: None
+        """
         xnorm = tuple(
             [
                 int(
@@ -108,31 +161,82 @@ class Logging:
             ]
         )
 
-        for index, _ in enumerate(xnorm):
-            if index + 1 >= len(xnorm):
-                break
-            if y[index] >= self.ymax:
-                continue
+        if len(x) == 1:
+            plot._display.pixel(xnorm[0], ynorm[0], self._line_color)
+        else:
+            for index, _ in enumerate(xnorm):
+                if index + 1 >= len(xnorm):
+                    break
+                if y[index] >= self.ymax:
+                    continue
 
-            self._draw_plotline(plot, index, xnorm, ynorm)
+                self._plot_line(plot, index, xnorm, ynorm)
 
-        if plot._showticks:
-            if plot._cartesianfirst:
-                plot._draw_ticks(x, y, self.ticksx, self.ticksy)
-                plot._cartesianfirst = False
-                plot._showticks = False
+            if fill:
+                for index, _ in enumerate(xnorm):
+                    plot._display.line(
+                        xnorm[index],
+                        ynorm[index],
+                        xnorm[index],
+                        plot._newymin,
+                        self._line_color,
+                    )
 
-    def _plot_line(self, plot, index, xnorm, ynorm):
-        plot._display.line(
-            xnorm[index],
-            ynorm[index],
-            xnorm[index + 1],
-            ynorm[index + 1],
-            self._line_color,
+    def _draw_ticks(self, plot) -> None:
+        """
+        Draw ticks in the plot area
+
+        """
+
+        ticksxnorm = tuple(
+            [
+                int(
+                    plot.transform(
+                        self.xmin, self.xmax, plot._newxmin, plot._newxmax, _
+                    )
+                )
+                for _ in self.ticksx
+            ]
+        )
+        ticksynorm = tuple(
+            [
+                int(
+                    plot.transform(
+                        self.ymin, self.ymax, plot._newymin, plot._newymax, _
+                    )
+                )
+                for _ in self.ticksy
+            ]
         )
 
-    def update(self, plot):
-        """
-        Update the plot with new data
-        """
-        plot._display.fill(0)
+        for i, tick in enumerate(ticksxnorm):
+            plot._display.line(
+                tick,
+                plot._newymin,
+                tick,
+                plot._newymin - plot._tickheightx,
+                plot._tickcolor,
+            )
+            if plot._showtext:
+                plot.show_text(
+                    "{:.{}f}".format(self.ticksx[i], plot._decimal_points),
+                    tick,
+                    plot._newymin,
+                    ax="x",
+                )
+
+        for i, tick in enumerate(ticksynorm):
+            plot._display.line(
+                plot._newxmin,
+                tick,
+                plot._newxmin + plot._tickheighty,
+                tick,
+                plot._tickcolor,
+            )
+            if plot._showtext:
+                plot.show_text(
+                    "{:.{}f}".format(self.ticksy[i], plot._decimal_points),
+                    plot._newxmin,
+                    tick,
+                    ax="y",
+                )

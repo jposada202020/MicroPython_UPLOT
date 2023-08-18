@@ -74,7 +74,7 @@ class PLOT:
         self._axesparams = "box"
         self._decimal_points = None
         self._buff_width = width
-        self._buf_height = height
+        self._buff_height = height
 
         self._width = x + width
         self._height = y + height
@@ -210,7 +210,7 @@ class PLOT:
                 [self.transform(0, 100, minx, maxx, _) for _ in subticks_dummy]
             )
         else:
-            ticksxnorm = tuple(ticksx)
+            ticksxnorm = tuple([self.transform(0, 100, minx, maxx, _) for _ in ticksx])
 
         if ticksy is None:
             ticksynorm = tuple(
@@ -220,7 +220,7 @@ class PLOT:
                 [self.transform(0, 100, miny, maxy, _) for _ in subticks_dummy]
             )
         else:
-            ticksynorm = tuple(ticksy)
+            ticksynorm = tuple([self.transform(0, 100, miny, maxy, _) for _ in ticksy])
 
         ticksxrenorm = tuple(
             [
