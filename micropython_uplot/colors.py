@@ -16,7 +16,9 @@ MicroPython Graphics Library
 
 def create_color(ssd, idx, r, g, b):
     """
-    Creates a color in the LUT of the display and returns the index."""
+    Creates a color in the LUT of the display and returns the index.
+
+    """
 
     color = ssd.rgb(r, g, b)
 

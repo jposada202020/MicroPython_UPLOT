@@ -151,7 +151,16 @@ class Cartesian:
                 plot._cartesianfirst = False
                 plot._showticks = False
 
-    def _draw_plotline(self, plot, index, xnorm, ynorm):
+    def _draw_plotline(
+        self, plot: PLOT, index: int, xnorm: tuple, ynorm: tuple
+    ) -> None:
+        """
+        Draw plot line
+        :param PLOT plot: plot object provided
+        :param int index: index of the point to be drawn
+        :param tuple xnorm: x points coordinates
+        :param tuple ynorm: y points coordinates
+        """
         if self._line_type == "-":
             self._plot_line(plot, index, xnorm, ynorm)
         elif self._line_type == "-.-":
@@ -165,7 +174,14 @@ class Cartesian:
             if index % 2 == 0:
                 self._plot_line(plot, index, xnorm, ynorm)
 
-    def _plot_line(self, plot, index, xnorm, ynorm):
+    def _plot_line(self, plot: PLOT, index: int, xnorm: tuple, ynorm: tuple) -> None:
+        """
+        Draw plot line
+        :param PLOT plot: plot object provided
+        :param int index: index of the point to be drawn
+        :param tuple xnorm: x points coordinates
+        :param tuple ynorm: y points coordinates
+        """
         plot._display.line(
             xnorm[index],
             ynorm[index],

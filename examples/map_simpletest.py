@@ -4,9 +4,7 @@
 
 import gc
 from math import pi, exp, sqrt
-from random import choice
 from machine import Pin, SPI
-import array
 from ili9486 import ILI9486
 from micropython_uplot.plot import PLOT
 from micropython_uplot.utils import linspace

@@ -7,20 +7,20 @@
 
 Plot Utilities
 
-
 * Author: Jose D. Montoya
 
-
 """
-
 
 # Taken from
 # https://stackoverflow.com/questions/12334442/does-python-have-a-linspace-function-in-its-std-lib
 
 
-def linspace(start, stop, n):
+def linspace(start: int, stop: int, n: int):
     """
     Creates a linearspace
+    :param int start: start number
+    :param int stop: end number
+    :param int n: Step number
     """
     if n == 1:
         yield stop

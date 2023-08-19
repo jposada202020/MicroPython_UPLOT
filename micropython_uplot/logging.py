@@ -93,7 +93,7 @@ class Logging:
                 self._draw_ticks(plot)
                 plot._showticks = False
 
-    def _plot_line(self, plot, index, xnorm, ynorm):
+    def _plot_line(self, plot: PLOT, index: int, xnorm: tuple, ynorm: tuple) -> None:
         plot._display.line(
             xnorm[index],
             ynorm[index],
@@ -117,9 +117,10 @@ class Logging:
         self.draw_new_lines(plot, x, y, fill)
 
     @staticmethod
-    def clear_plot(plot) -> None:
+    def clear_plot(plot: PLOT) -> None:
         """
         Clears the plot area
+        :param PLOT plot: plot object provided
         """
 
         plot._display.rect(
@@ -134,7 +135,7 @@ class Logging:
     def draw_new_lines(self, plot: PLOT, x: list, y: list, fill: bool = False) -> None:
         """
         Draw the plot lines
-        :param Plot plot: plot object provided
+        :param PLOT plot: plot object provided
         :param list x: list of x values
         :param list y: list of y values
         :param bool fill: parameter to fill the plot graphic. Defaults to False
@@ -185,6 +186,7 @@ class Logging:
     def _draw_ticks(self, plot) -> None:
         """
         Draw ticks in the plot area
+        :param PLOT plot: plot object provided
 
         """
 

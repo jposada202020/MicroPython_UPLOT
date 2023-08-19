@@ -76,7 +76,7 @@ class Map:
         deltay = plot._newymax + plot.padding
 
         for i, row in enumerate(data_points):
-            for j, col in enumerate(row):
+            for _, col in enumerate(row):
                 if floor(col / self._step) > 9:
                     color = 9
                 else:
@@ -94,12 +94,12 @@ class Map:
             deltay = deltay + ydist
 
 
-def color_fade(start_color: int, end_color: int, fraction: float):
+def color_fade(start_color: int, end_color: int, fraction: float) -> tuple:
     """Linear extrapolation of a color between two RGB colors (tuple or 24-bit integer).
 
-    :param start_color: starting color
-    :param end_color: ending color
-    :param fraction: Floating point number  ranging from 0 to 1 indicating what
+    :param int start_color: starting color
+    :param int end_color: ending color
+    :param float fraction: Floating point number  ranging from 0 to 1 indicating what
      fraction of interpolation between start_color and end_color.
 
     """

@@ -451,7 +451,7 @@ class PLOT:
                 )
                 start = start - self._grid_espace - self._grid_lenght
 
-    def _writeplainpbm(self, file: str = "newfile.pbm"):
+    def _writeplainpbm(self, file: str = "newfile.pbm") -> None:
         """
         Function to write a plain pbm file
         adapted from https://github.com/orgs/micropython/discussions/10785
@@ -466,7 +466,9 @@ class PLOT:
                 file_write.write("\n")
             file_write.close()
 
-    def _savingppm(self, filename: str = "picture.ppm", width=480, height=320):
+    def _savingppm(
+        self, filename: str = "picture.ppm", width: int = 480, height: int = 320
+    ) -> None:
         """
         Function to save the screen as a ppm file
         Adapted from https://gist.github.com/nicholasRutherford/c95a55239e03ba99bab3

@@ -11,18 +11,18 @@ MicroPython bar graph
 
 * Author: Jose D. Montoya
 
-
 """
 
 try:
     from micropython_uplot.plot import PLOT
+    from typing import Union, Optional
 except ImportError:
     pass
 from math import ceil
 from micropython_uplot.colors import set_color
 
 __version__ = "0.0.0+auto.0"
-__repo__ = "https://github.com/adafruit/CircuitPython_uplot.git"
+__repo__ = "https://github.com/adafruit/MicroPython_uplot.git"
 
 # pylint: disable=protected-access
 # pylint: disable=no-self-use
@@ -39,10 +39,10 @@ class Bar:
         x: list,
         y: list,
         fill: bool = False,
-        bar_space=16,
-        xstart=50,
-        color_palette=None,
-        max_value=None,
+        bar_space: int = 16,
+        xstart: int = 50,
+        color_palette: Optional[list] = None,
+        max_value: Optional[Union[float, int]] = None,
     ) -> None:
         """
         :param Plot plot: Plot object for the scatter to be drawn
@@ -114,9 +114,12 @@ class Bar:
             self._create_bars(plot, xstart, i)
             xstart = xstart + bar_space
 
-    def _create_bars(self, plot, xstart: int, indice: int):
+    def _create_bars(self, plot: PLOT, xstart: int, indice: int):
         """
         create plot bars
+        :param PLOT plot: plot object provided
+        :param int xstart: start point in the x axis for the bar to start
+        :param int indice: index of the bar to be drawn
         """
 
         plot._display.rect(

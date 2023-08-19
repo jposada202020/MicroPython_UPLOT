@@ -130,7 +130,7 @@ class Scatter:
     def _draw_pointer(self, plot: PLOT) -> None:
         """
 
-        :param plot: Plot object for the scatter to be drawn
+        :param PLOT plot: Plot object for the scatter to be drawn
 
         """
 
