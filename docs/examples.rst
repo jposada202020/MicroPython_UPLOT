@@ -120,3 +120,13 @@ Logging Animation
     :caption: examples/logging_animation.py
     :lines: 5-
 .. image:: ../docs/logging_animation.jpg
+
+Map Simpletest
+----------------------------
+
+Map Simpletest
+
+.. literalinclude:: ../examples/map_simpletest.py
+    :caption: examples/map_simpletest.py
+    :lines: 5-
+.. image:: ../docs/map_simpletest.jpg

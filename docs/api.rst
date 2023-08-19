@@ -19,3 +19,6 @@ MicroPython UPLOT Library
 
 .. automodule:: micropython_uplot.logging
     :members:
+
+.. automodule:: micropython_uplot.map
+    :members:
