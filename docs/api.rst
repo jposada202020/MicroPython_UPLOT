@@ -22,3 +22,6 @@ MicroPython UPLOT Library
 
 .. automodule:: micropython_uplot.map
     :members:
+
+.. automodule:: micropython_uplot.fillbetween
+    :members:

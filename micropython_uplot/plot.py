@@ -485,7 +485,7 @@ class PLOT:
             self._color0,
             self._color2,
             self._color1,
-            self._color0,
+            (255, 0, 0),
             (237, 0, 86),
             (218, 0, 105),
             (199, 0, 124),

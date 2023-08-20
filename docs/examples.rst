@@ -130,3 +130,13 @@ Map Simpletest
     :caption: examples/map_simpletest.py
     :lines: 5-
 .. image:: ../docs/map_simpletest.jpg
+
+Fillbetween Simpletest
+----------------------------
+
+Fillbetween Simpletest
+
+.. literalinclude:: ../examples/fillbetween_simpletest.py
+    :caption: examples/fillbetween_simpletest.py
+    :lines: 5-
+.. image:: ../docs/fillbetween.jpg
