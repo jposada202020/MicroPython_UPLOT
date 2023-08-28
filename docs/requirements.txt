@@ -2,6 +2,6 @@
 #
 # SPDX-License-Identifier: Unlicense
 
-sphinx>=6.0.0,<7.2
-sphinx-immaterial
+sphinx>=7.0.0
+sphinx-immaterial>=0.11.7
 mock
