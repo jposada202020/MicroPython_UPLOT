@@ -1,26 +1,11 @@
-Introduction
-============
+⛔️ DEPRECATED
+===============
 
+This repository is no longer supported, please consider using alternatives.
 
-.. image:: https://readthedocs.org/projects/micropython-uplot/badge/?version=latest
-    :target: https://micropython-uplot.readthedocs.io/en/latest/
-    :alt: Documentation Status
-
-.. image:: https://img.shields.io/badge/micropython-Ok-purple.svg
-    :target: https://micropython.org
-    :alt: micropython
-
-.. image:: https://img.shields.io/pypi/v/micropython-uplot.svg
-    :alt: latest version on PyPI
-    :target: https://pypi.python.org/pypi/micropython-uplot
-
-.. image:: https://static.pepy.tech/personalized-badge/micropython-uplot?period=total&units=international_system&left_color=grey&right_color=blue&left_text=Pypi%20Downloads
-    :alt: Total PyPI downloads
-    :target: https://pepy.tech/project/micropython-uplot
-
-.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-    :target: https://github.com/psf/black
-    :alt: Code Style: Black
+.. image:: http://unmaintained.tech/badge.svg
+  :target: http://unmaintained.tech
+  :alt: No Maintenance Intended
 
 MicroPython Graphics Library. This library uses the IL9486 driver from Peter Hinch taken from
 https://github.com/peterhinch/micropython-nano-gui. with a Waveshare 3.5 display
